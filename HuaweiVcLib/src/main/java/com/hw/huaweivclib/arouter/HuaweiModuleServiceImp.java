@@ -85,6 +85,11 @@ public class HuaweiModuleServiceImp implements IHuaweiModuleService {
 
     @Override
     public void initHuawei(@NotNull Context application, @NotNull String appName) {
-        HuaweiInitImp.initHuawei(application,appName);
+        HuaweiInitImp.initHuawei(application, appName);
+    }
+
+    @Override
+    public boolean joinConfNetWork(@NotNull String smcConfId, @NotNull String siteUri) {
+        return HuaweiCallImp.joinConfNetWork(smcConfId, siteUri);
     }
 }

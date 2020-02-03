@@ -77,6 +77,12 @@ interface IHuaweiModuleService : IProvider {
     fun joinConf(accessCode: String)
 
     /**
+     * 加入会议调用网络接口
+     */
+    fun joinConfNetWork(smcConfId: String,
+                        siteUri: String):Boolean
+
+    /**
      * 初始化华为
      */
     fun initHuawei(application: Context, appName: String)

@@ -109,8 +109,48 @@ object RouterPath {
             //在线的会场
             const val FILED_ONLINE_LIST = "FILED_ONLINE_LIST"
 
-            //会议id
-            const val FILED_SMC_CONF_ID = "FILED_SMC_CONF_ID"
+            //活动类型，TYPE_CREATE_CONF:创建会议，JOIN_CONF:加入会议
+            const val FILED_TYPE = "type"
+
+            //创建会议
+            const val TYPE_CREATE_CONF = 0
+            //会议名称
+            const val FILED_CONF_NAME = "confName"
+            //会议时长
+            const val FILED_DURATION = "duration"
+            //参会列表
+            const val FILED_SITES = "sites"
+
+            //加入会议
+            const val TYPE_JOIN_CONF = 1
+            //加入会议的smc会议id
+            const val FILED_SMC_CONF_ID = "smcConfId"
+
+
+            //用户账号，同时也是uuid
+            const val FILED_USER_NAME = "userName"
+
+            //用户显示名称
+            const val FILED_DISPLAY_NAME = "displayName"
+
+            //密码
+            const val FILED_PASS_WORD = "password"
+
+            //
+            const val FILED_USER_TICKET = "UserTicket"
+
+            //smc路径
+            const val FILED_HUAWEI_SMC_URL = "huaweiServerUrl"
+
+            //smc端口
+            const val FILED_HUAWEI_SMC_PORT = "huaweiServerPort"
+
+
+            //鉴权信息
+            const val FILED_APP_PACKAGE_NAME = "appPackageName"
+            const val FILED_SECRET_KEY = "secretKey"
+            const val FILED_BASE_URL = "backServerUrl"
+
         }
     }
 

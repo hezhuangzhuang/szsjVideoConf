@@ -53,13 +53,13 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
         super.onCreate(savedInstanceState)
         //初次进入界面时隐藏软键盘
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
+        mLoadingDialog = ProgressLoading.create(this)
         initData(intent.extras)
         setRootLayout(bindLayout())
         initView(savedInstanceState, mContentView)
         doBusiness()
         setListeners()
-        mLoadingDialog = ProgressLoading.create(this)
+
         AppManager.instance.addActivity(this)
     }
 

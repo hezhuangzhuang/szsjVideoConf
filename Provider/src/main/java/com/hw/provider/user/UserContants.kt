@@ -31,4 +31,7 @@ object UserContants {
     //是否是正式环境
     val FORMAL_URL = "FORMAL_URL"
 
+
+
+
 }

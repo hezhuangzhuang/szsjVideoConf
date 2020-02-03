@@ -12,7 +12,7 @@ buildscript {
         mavenCentral()
 
         //华为推送
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'http://developer.huawei.com/repo/' }
     }
 
     dependencies {
@@ -36,7 +36,7 @@ allprojects {
         maven { url "https://jitpack.io" }
 
         //华为推送
-        maven {url 'http://developer.huawei.com/repo/'}
+        maven { url 'http://developer.huawei.com/repo/' }
     }
 }
 

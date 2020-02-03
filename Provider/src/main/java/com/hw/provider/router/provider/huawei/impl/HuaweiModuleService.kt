@@ -100,9 +100,22 @@ object HuaweiModuleService {
     }
 
     /**
-     * 呼叫会场
+     * 加入会议
      */
-    fun callSite(accessCode: String) {
+    fun joinConf(accessCode: String) {
         navigation.joinConf(accessCode)
+    }
+
+    /**
+     * 加入会议
+     */
+    fun joinConfNetWork(
+        smcConfId: String,
+        siteUri: String
+    ) {
+        navigation.joinConfNetWork(
+            smcConfId,
+            siteUri
+        )
     }
 }

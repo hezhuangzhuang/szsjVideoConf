@@ -81,6 +81,12 @@ public class LoginMgr implements ITupLoginCenterNotify {
      * @return int : 0:success
      */
     public int login(LoginParam loginParam) {
+        //判断是否为空
+        if (null == TupMgr.getInstance()
+                || null == TupMgr.getInstance().getFeatureMgr()) {
+            HuaweiInitImp.initHuawei(BaseApp.context, BuildConfig.APPLICATION_ID);
+        }
+
         LoginCenter.getInstance().setServerType(loginParam.getServerType());
 
         //Get local IP

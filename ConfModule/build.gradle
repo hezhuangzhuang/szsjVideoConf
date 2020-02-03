@@ -1,20 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
-//dagger2
-apply plugin: 'kotlin-kapt'
-
-//greendao数据库
-apply plugin: 'org.greenrobot.greendao'
-
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
 
     defaultConfig {
-        minSdkVersion rootProject.ext.android.minSdkVersion
-        targetSdkVersion rootProject.ext.android.targetSdkVersion
-
+        minSdkVersion 15
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -28,25 +22,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-// 配置GreenDao基本参数
-greendao {
-    //数据库版本号，升级时修改
-    schemaVersion 2
-
-    //生成的DAO，DaoMaster和DaoSession的包路径。默认与表实体所在的包路径相同
-    daoPackage 'com.hw.provider.db'
-
-    //生成源文件的路径。默认源文件目录是在build目录中的(build/generated/source/greendao)
-    targetGenDir 'src/main/java'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    api project(path: ':baselibrary')
 }

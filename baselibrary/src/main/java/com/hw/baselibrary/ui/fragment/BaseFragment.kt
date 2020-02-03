@@ -28,7 +28,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment
         private const val STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN"
     }
 
-    protected lateinit var mActivity: Activity
+    protected lateinit var mActivity: BaseActivity
     protected lateinit var mInflater: LayoutInflater
     protected lateinit var mContentView: View
     protected lateinit var mLoadingDialog: ProgressLoading
@@ -51,7 +51,12 @@ import com.trello.rxlifecycle2.components.support.RxFragment
      */
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mActivity = context as Activity
+//        mActivity = context as Activity
+
+        mActivity = context as BaseActivity
+
+        mLoadingDialog  = mActivity!!.mLoadingDialog
+
     }
 
     abstract fun initData(bundle: Bundle?)
@@ -101,7 +106,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.d(TAG, "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
-        mLoadingDialog = ProgressLoading.create(mActivity)
+//        mLoadingDialog = ProgressLoading.create(mActivity)
         initView(savedInstanceState, mContentView)
         initTitleBar()
         initImmersion()

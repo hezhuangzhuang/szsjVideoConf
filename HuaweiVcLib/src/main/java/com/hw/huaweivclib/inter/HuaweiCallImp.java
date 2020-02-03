@@ -22,9 +22,11 @@ import com.hw.provider.huawei.commonservice.util.LogUtil;
 import com.hw.provider.router.provider.huawei.impl.HuaweiModuleService;
 import com.hw.provider.user.UserContants;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import okhttp3.RequestBody;
 
@@ -107,6 +109,55 @@ public class HuaweiCallImp {
 //        LoadingActivity.startActivty(BaseApp.context, accessCode);
         return CallMgr.getInstance().startCall(accessCode, true);
     }
+
+    /**
+     * 加入会议
+     *
+     * @param accessCode
+     * @return
+     */
+    public static boolean joinConfNetWork(@NotNull String smcConfId, @NotNull String siteUri) {
+        if (!DeviceManager.isNetworkAvailable(BaseApp.context)) {
+            ToastHelper.INSTANCE.showShort("请检查您的网络");
+            return false;
+        }
+
+        //是否需要登录
+        hasLogin();
+
+        //是否需要自动接听
+        SPStaticUtils.put(UIConstants.IS_AUTO_ANSWER, true);
+
+        //是否是加入会议
+        SPStaticUtils.put(UIConstants.JOIN_CONF, true);
+
+        final boolean[] isSuccess = {false};
+
+        Disposable subscribe = RetrofitManager.INSTANCE.create(ConfControlApi.class, Urls.BASE_URL)
+                .joinConf(smcConfId, siteUri)
+                .compose(new CustomCompose<BaseData>())
+                .subscribe(new Consumer<BaseData>() {
+                    @Override
+                    public void accept(BaseData baseData) throws Exception {
+                        LoadingActivity.startActivty(BaseApp.context, "");
+                        isSuccess[0] = true;
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        isSuccess[0] = false;
+
+                        //是否需要自动接听
+                        SPStaticUtils.put(UIConstants.IS_AUTO_ANSWER, false);
+
+                        //是否是加入会议
+                        SPStaticUtils.put(UIConstants.JOIN_CONF, false);
+                    }
+                });
+
+        return isSuccess[0];
+    }
+
 
     /**
      * 创建即时会议

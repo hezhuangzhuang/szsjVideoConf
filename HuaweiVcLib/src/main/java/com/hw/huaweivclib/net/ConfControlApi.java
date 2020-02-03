@@ -25,7 +25,15 @@ public interface ConfControlApi {
             @Body RequestBody body
     );
 
-
+    /**
+     * 加入会议
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("conf/scheduleConf")
+    Observable<BaseData> joinConf(
+            @Query("smcConfId") String smcConfId,
+            @Query("siteUri") String siteUri
+    );
 
     /**
      * 设置麦克风静音
