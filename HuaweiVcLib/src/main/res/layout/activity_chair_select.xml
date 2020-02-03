@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_222"
+    android:orientation="vertical"
+    tools:context=".activity.ChairSelectActivity">
+
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/tran"
+        app:leftIcon="@mipmap/bar_icon_back_white"
+        app:titleColor="@color/white"
+        app:titleSize="18sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="指定主席"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </com.hjq.bar.TitleBar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleBar"
+        tools:listitem="@layout/item_chair_select" />
+</RelativeLayout>

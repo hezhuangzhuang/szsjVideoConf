@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--    解决java.net.UnknownServiceException:
+    CLEARTEXT communication to *** not permitted by networ-->
+
+    <!--
+    第一步->
+    在 res 下新增一个 xml 目录，然后创建一个名为：network_config.xml 文件（名字自定）
+     ，内容如下，大概意思就是允许开启http请求
+
+    第二步->
+    <application
+    android:networkSecurityConfig="@xml/network_config" >
+    -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

@@ -1,0 +1,7 @@
+include ':app',
+        ':baselibrary',
+        ':Provider',
+        ':HuaweiVcLib'
+include ':FlycoTabLayout_Lib'
+
+rootProject.name='KotlinMvpAndroidxFrame'

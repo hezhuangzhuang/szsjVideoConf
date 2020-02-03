@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+//dagger2
+apply plugin: 'kotlin-kapt'
+
+//华为推送
+apply plugin: 'com.huawei.agconnect'
+
+//TODO:Arouter需要配置--跳转页面要用到
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.zxwl.frame"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 9
+        versionName "1.0.9"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi'
+        }
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '86979731'
+            storeFile file('zxwl.jks')
+            storePassword '86979731'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+
+        release {
+            signingConfig signingConfigs.config
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            android.applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    if ("release".equals(variant.buildType.name)) {
+                        def fileName = "app_${variant.versionName}_${releaseTime()}.apk"
+                        def outFile = output.outputFile
+                        if (outFile != null && outFile.name.endsWith('.apk')) {
+                            outputFileName = fileName  //  output.outputFile 改为 outputFileName
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd_HHmm", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //65535
+    implementation rootProject.ext.multidex
+
+    //基类
+    api project(path: ':Provider')
+
+    //华为vc模块
+    api project(path: ':HuaweiVcLib')
+
+    //Dagger2-每个使用到的模块都需要引入
+    kapt rootProject.ext.daggerCompiler
+
+    //Arouter-每个使用到的模块都需要引入--arouterCompiler
+    kapt rootProject.ext.arouterCompiler
+
+//    //消息模块
+//    api project(path: ':MessageModule')
+
+    //华为推送
+    implementation 'com.huawei.hms:push:3.0.3.301'
+
+    //获取地理位置
+    implementation rootProject.ext.smartLocation
+}

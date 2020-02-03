@@ -1,0 +1,11 @@
+<resources>
+
+
+
+    <!--引导页-->
+    <style name="LauncherStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/custom_launcher_bg</item>
+    </style>
+
+</resources>

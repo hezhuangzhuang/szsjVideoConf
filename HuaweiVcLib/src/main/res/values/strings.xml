@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HuaweiVcLib</string>
+
+
+    <string name="ctd_failed">CTD call failed</string>
+    <string name="ctd_success">Please answer the call.</string>
+    <string name="video_be_refused">The other party rejected your request to upgrade to a video call.</string>
+
+</resources>
