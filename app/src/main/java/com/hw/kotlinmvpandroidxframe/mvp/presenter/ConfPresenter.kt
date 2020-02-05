@@ -12,6 +12,10 @@ import javax.inject.Inject
  */
 class ConfPresenter @Inject constructor() : BasePresenter<MainContract.View>(),
     MainContract.Presenter {
+
+    override fun authentication(appPackageName: String, secretKey: String) {
+    }
+
     @Inject
     lateinit var confService: ConfService
 

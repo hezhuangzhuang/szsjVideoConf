@@ -14,6 +14,7 @@ import com.hw.huaweivclib.service.AudioStateWatchService;
 import com.hw.provider.huawei.commonservice.common.LocContext;
 import com.hw.provider.huawei.commonservice.localbroadcast.CustomBroadcastConstants;
 import com.hw.provider.huawei.commonservice.localbroadcast.LocBroadcast;
+import com.hw.provider.huawei.commonservice.util.LogUtil;
 
 /**
  * author：pc-20171125
@@ -27,8 +28,13 @@ public class HuaweiLoginImp {
     public static void login(String userName,
                              String password,
                              String smcRegisterServer,
-                             String smcRegisterPort){
+                             String smcRegisterPort) {
 
+        LogUtil.d("userName-->" + userName +
+                ",password-->" + password +
+                ",smcRegisterServer-->" + smcRegisterServer +
+                ",smcRegisterPort-->" + smcRegisterPort
+        );
         if (!DeviceManager.isNetworkAvailable(BaseApp.context)) {
             return;
         }

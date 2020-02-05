@@ -5,7 +5,6 @@ package com.huawei.opensdk.loginmgr;
  * 登陆模块常量类.
  */
 public class LoginConstant {
-
     public static final String FILE_NAME = "TupLoginParams";
 
     public static final int FIRST_LOGIN = 0;

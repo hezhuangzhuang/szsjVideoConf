@@ -18,6 +18,7 @@ import com.huawei.opensdk.ecsdk.utils.FileUtil;
 import com.huawei.opensdk.loginmgr.LoginMgr;
 import com.huawei.opensdk.servicemgr.ServiceMgr;
 import com.huawei.utils.ZipUtil;
+import com.hw.baselibrary.utils.ToastHelper;
 import com.hw.provider.huawei.commonservice.common.LocContext;
 import com.hw.provider.huawei.commonservice.util.CrashUtil;
 import com.hw.provider.huawei.commonservice.util.LogUtil;
@@ -35,13 +36,15 @@ import java.util.concurrent.Executors;
  */
 public class HuaweiInitImp {
 
+    //初始化时需要的常量
+    public static final String APPLICATION_ID = "com.zxwl.frame";
+
     private static final int EXPECTED_FILE_LENGTH = 7;
 
-    private static Application application;
 
     public static boolean initHuawei(Context application, String appName) {
         //判断进程是否还在
-        if (!isFrontProcess(application, appName)) {
+        if (!isFrontProcess(application, APPLICATION_ID)) {
             LocContext.init(application);
             CrashUtil.getInstance().init(application);
             Log.i("SDKDemo", "onCreate: PUSH Process.");

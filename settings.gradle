@@ -1,4 +1,4 @@
-include ':app', ':ConfModule',
+include ':app', ':ConfModule', ':szsjhost',
         ':baselibrary',
         ':Provider',
         ':HuaweiVcLib'

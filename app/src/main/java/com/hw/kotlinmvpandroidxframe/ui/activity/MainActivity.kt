@@ -2,6 +2,7 @@ package com.hw.kotlinmvpandroidxframe.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.annotation.NonNull
@@ -11,6 +12,8 @@ import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.hjq.bar.OnTitleBarListener
+import com.hw.baselibrary.common.BaseApp
+import com.hw.baselibrary.constant.PermissionConstants
 import com.hw.baselibrary.net.networkmonitor.NetType
 import com.hw.baselibrary.net.networkmonitor.Network
 import com.hw.baselibrary.net.networkmonitor.NetworkManager
@@ -21,7 +24,7 @@ import com.hw.baselibrary.utils.PermissionUtils
 import com.hw.baselibrary.utils.ToastHelper
 import com.hw.baselibrary.utils.rom.SystemUtil
 import com.hw.baselibrary.utils.sharedpreferences.SPStaticUtils
-import com.hw.huaweivclib.inter.HuaweiCallImp
+import com.hw.huaweivclib.inter.HuaweiInitImp
 import com.hw.kotlinmvpandroidxframe.BuildConfig
 import com.hw.kotlinmvpandroidxframe.R
 import com.hw.kotlinmvpandroidxframe.injection.component.DaggerMainComponent
@@ -45,11 +48,16 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
+//登录华为平台失败
+const val HUAWEI_LOGIN_FAIL = 1
+//鉴权失败
+const val AUTHENTICATION_FAIL = 2
+
 @Route(path = RouterPath.Main.PATH_MAIN)
 class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
     override fun authenticationSuccess() {
         //开始登录
-        HuaweiModuleService.login(siteUri, passWord, smcUrl, smcPort)
+        HuaweiModuleService.login(siteUri!!, passWord!!, smcUrl!!, smcPort!!)
     }
 
     override fun authenticationFail() {
@@ -61,35 +69,37 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
     //TYPE_CREATE_CONF:创建会议，JOIN_CONF:加入会议
     var type: Int = 0
 
-    lateinit var siteUri: String
-
-    lateinit var displayName: String
-
-    lateinit var passWord: String
-
-    lateinit var smcUrl: String
-
-    lateinit var smcPort: String
+    var siteUri: String? = null
+    var displayName: String? = null
+    var passWord: String? = null
+    var smcUrl: String? = null
+    var smcPort: String? = null
 
     //type为CREATE_CONF时获取会议名称，时长，参会列表
-    lateinit var confName: String
-    lateinit var duration: String
-    lateinit var sites: String
+    var confName: String? = null
+    var duration: String? = null
+    var sites: String? = null
 
     //type为JOIN_CONF时获取smc会议id
-    lateinit var smcConfId: String
+    var smcConfId: String? = null
 
     //鉴权信息
-    lateinit var appPackageName: String
-    lateinit var secretKey: String
+    var appPackageName: String? = null
+    var secretKey: String? = null
+
+    //是否是第三方启动
+    var otherStart: Boolean = false
 
     override fun initComponent() {
-        DaggerMainComponent.builder().activityComponent(mActivityComponent)
+        DaggerMainComponent.builder()
+            .activityComponent(mActivityComponent)
             .mainModule(MainModule())
             .build()
             .inject(this)
 
         mPresenter.mRootView = this
+
+//        mPresenter.getConfList(siteUri)
     }
 
     /**
@@ -128,6 +138,19 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
             override fun onTitleClick(v: View?) {
             }
         })
+
+        btLogin.setOnClickListener {
+            if (TextUtils.isEmpty(siteUri)   ||
+                TextUtils.isEmpty(passWord)  ||
+                TextUtils.isEmpty(smcUrl)  ||
+                TextUtils.isEmpty(smcPort)
+            ) {
+                ToastHelper.showShort("登录信息缺失")
+                return@setOnClickListener
+            }
+
+            HuaweiModuleService.login(siteUri!!, passWord!!, smcUrl!!, smcPort!!)
+        }
     }
 
     override fun onError(text: String) {
@@ -144,17 +167,80 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
         //注册登录广播
         LocBroadcast.getInstance().registerBroadcast(loginReceiver, loginActions)
 
-        //获取鉴权信息
-        appPackageName = intent.getStringExtra(RouterPath.Huawei.FILED_APP_PACKAGE_NAME)
-        secretKey = intent.getStringExtra(RouterPath.Huawei.FILED_SECRET_KEY)
+        otherStart = intent.getBooleanExtra(RouterPath.Huawei.FILED_OTHER_START, false)
 
-        type = intent.getIntExtra(RouterPath.Huawei.FILED_TYPE, RouterPath.Huawei.TYPE_CREATE_CONF)
-        siteUri = intent.getStringExtra(RouterPath.Huawei.FILED_USER_NAME)
-        displayName = intent.getStringExtra(RouterPath.Huawei.FILED_DISPLAY_NAME)
-        passWord = intent.getStringExtra(RouterPath.Huawei.FILED_PASS_WORD)
-        smcUrl = intent.getStringExtra(RouterPath.Huawei.FILED_HUAWEI_SMC_URL)
-        smcPort = intent.getStringExtra(RouterPath.Huawei.FILED_HUAWEI_SMC_PORT)
+        //第三方启动
+        if (otherStart) {
+            appPackageName = intent.getStringExtra(
+                RouterPath.Huawei.FILED_APP_PACKAGE_NAME
+            )
+            secretKey = intent.getStringExtra(
+                RouterPath.Huawei.FILED_SECRET_KEY
+            )
+            type =
+                intent.getIntExtra(
+                    RouterPath.Huawei.FILED_TYPE,
+                    RouterPath.Huawei.TYPE_CREATE_CONF
+                )
+            siteUri = intent.getStringExtra(RouterPath.Huawei.FILED_USER_NAME)
+            displayName = intent.getStringExtra(RouterPath.Huawei.FILED_DISPLAY_NAME)
+            passWord = intent.getStringExtra(RouterPath.Huawei.FILED_PASS_WORD)
+            smcUrl = intent.getStringExtra(RouterPath.Huawei.FILED_HUAWEI_SMC_URL)
+            smcPort = intent.getStringExtra(RouterPath.Huawei.FILED_HUAWEI_SMC_PORT)
+        } else {
+
+        }
+
+//        LogUtils.d(
+//            "type->${type}," +
+//                    "siteUri->${siteUri}," +
+//                    "displayName->${displayName}," +
+//                    "passWord->${passWord}," +
+//                    "smcUrl->${smcUrl}," +
+//                    "smcPort->${smcPort},"
+//        )
     }
+
+    private fun checkPermission() {
+        PermissionUtils.permission(
+            PermissionConstants.STORAGE,
+            PermissionConstants.CAMERA,
+            PermissionConstants.MICROPHONE
+        )
+            //.rationale { shouldRequest -> DialogHelper.showRationaleDialog(shouldRequest) }
+            .callback(object : PermissionUtils.FullCallback {
+                override fun onGranted(permissionsGranted: List<String>) {
+                    if (otherStart) {
+                        //注册广播
+                        LocBroadcast.getInstance().registerBroadcast(loginReceiver, loginActions)
+
+                        //初始化华为
+                        HuaweiInitImp.initHuawei(BaseApp.context, BuildConfig.APPLICATION_ID)
+
+                        showLoading()
+
+                        //登录华为平台
+                        HuaweiModuleService.login(siteUri!!, passWord!!, smcUrl!!, smcPort!!)
+
+                        //开始鉴权
+                        //mPresenter.authentication(appPackageName, secretKey)
+                    }
+                }
+
+                override fun onDenied(
+                    permissionsDeniedForever: List<String>,
+                    permissionsDenied: List<String>
+                ) {
+                    LogUtils.d(permissionsDeniedForever, permissionsDenied)
+                    if (!permissionsDeniedForever.isEmpty()) {
+                        return
+                    }
+                    finish()
+                }
+            })
+            .request()
+    }
+
 
     @Network(netType = NetType.AUTO)
     fun onNetChanged(netType: NetType) {
@@ -216,9 +302,6 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
 
         EventBus.getDefault().register(this)
 
-        mPresenter.getConfList(siteUri)
-
-
         initRefreshLayout()
         initAdapter()
     }
@@ -234,8 +317,8 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
             }
         }
 
-        //开始鉴权
-        mPresenter.authentication(appPackageName, secretKey)
+        //检查权限
+        checkPermission()
     }
 
     /**
@@ -297,7 +380,6 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
 
     }
 
-
     /**
      * 清空用户信息
      */
@@ -352,7 +434,7 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
         refreshLayout.setRefreshFooter(ClassicsFooter(this).setSpinnerStyle(SpinnerStyle.Translate))
 
         refreshLayout.setOnRefreshListener {
-            mPresenter.getConfList(siteUri)
+            mPresenter.getConfList(siteUri!!)
         }
 
         //是否启用刷新
@@ -374,9 +456,8 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
 //            HuaweiModuleService.callSite(dateBean?.accessCode!!)
         }
         rvList.adapter = confAdapter
-        rvList.layoutManager = LinearLayoutManager(this)
+        rvList.layoutManager = LinearLayoutManager(mActivity)
     }
-
 
     /*华为登录相关start*/
     val loginActions = arrayOf<String>(
@@ -391,13 +472,20 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
             when (broadcastName) {
                 CustomBroadcastConstants.LOGIN_SUCCESS -> {
                     dismissLoading()
+                    ToastHelper.showShort("登录成功")
+
+                    //华为sip
+                    SPStaticUtils.put(UserContants.HUAWEI_ACCOUNT, siteUri)
+                    //显示名称
+                    SPStaticUtils.put(UserContants.DISPLAY_NAME, displayName)
 
                     handlerHuaweiLoginSuccess()
                 }
 
                 CustomBroadcastConstants.LOGIN_FAILED -> {
                     dismissLoading()
-
+                    val errorMessage = obj as String
+                    ToastHelper.showShort("登录失败-->" + errorMessage)
                     handlerHuaweiLoginFail()
                 }
 
@@ -424,13 +512,12 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
                 sites = intent.getStringExtra(RouterPath.Huawei.FILED_SITES)
 
                 //自动添加召集者本身
-                if (!sites.contains(siteUri)) {
-                    sites += "$siteUri,"
+                if (!sites!!.contains(siteUri!!)) {
+                    sites += ",${siteUri}"
                 }
-
                 //创建视频会议
                 HuaweiModuleService.createConfNetWork(
-                    confName, duration, "", sites, "", 1
+                    confName!!, duration!!, "", sites!!, "", 1
                 )
             }
 
@@ -439,7 +526,7 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
                 smcConfId = intent.getStringExtra(RouterPath.Huawei.FILED_SMC_CONF_ID)
 
                 //加入会议
-                HuaweiModuleService.joinConfNetWork(smcConfId, siteUri)
+                HuaweiModuleService.joinConfNetWork(smcConfId!!, siteUri!!)
             }
         }
     }
@@ -448,6 +535,67 @@ class MainActivity : BaseMvpActivity<ConfPresenter>(), MainContract.View {
      * 登录华为失败
      */
     private fun handlerHuaweiLoginFail() {
+        showErrorDialog("登录华为平台失败", 1)
+    }
 
+    /**
+     * 显示错误对话框
+     * @param   errorMsg    错误信息
+     * @param   type        错误类型    1:登录华为平台失败，2:鉴权失败
+     */
+    private fun showErrorDialog(errorMsg: String, type: Int) {
+        if (null == errorDialog) {
+            initErrodDialog(errorMsg, type)
+        }
+        errorDialog?.show()
+    }
+
+    private fun dismissErrorDialog() {
+        errorDialog?.dismiss()
+        errorDialog = null
+    }
+
+    private var errorDialog: MaterialDialog? = null
+
+    /**
+     * 初始化失败对话框
+     */
+    private fun initErrodDialog(errorMsg: String, type: Int) {
+        errorDialog = MaterialDialog.Builder(this)
+            .title("提示")
+            .content(errorMsg)
+            .positiveText("重试")
+            .negativeText("关闭应用")
+            .onNegative { dialog, which ->
+                finish()
+                errorDialog = null
+            }
+            .onPositive { dialog, which ->
+                showLoading()
+                //确认的点击事件
+                onPositiveClick(type)
+            }
+            .build()
+    }
+
+    /**
+     *  1:登录华为平台失败，2:鉴权失败
+     */
+    private fun onPositiveClick(type: Int) {
+        when (type) {
+            //华为平台登录失败
+            HUAWEI_LOGIN_FAIL -> {
+                //登录华为平台
+                HuaweiModuleService.login(siteUri!!, passWord!!, smcUrl!!, smcPort!!)
+                dismissErrorDialog()
+            }
+
+            //鉴权失败
+            AUTHENTICATION_FAIL -> {
+                //重新鉴权
+                mPresenter.authentication(appPackageName!!, secretKey!!)
+                dismissErrorDialog()
+            }
+        }
     }
 }

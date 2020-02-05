@@ -109,6 +109,7 @@ object RouterPath {
             //在线的会场
             const val FILED_ONLINE_LIST = "FILED_ONLINE_LIST"
 
+
             //活动类型，TYPE_CREATE_CONF:创建会议，JOIN_CONF:加入会议
             const val FILED_TYPE = "type"
 
@@ -150,6 +151,10 @@ object RouterPath {
             const val FILED_APP_PACKAGE_NAME = "appPackageName"
             const val FILED_SECRET_KEY = "secretKey"
             const val FILED_BASE_URL = "backServerUrl"
+
+
+
+            const val FILED_OTHER_START = "FILED_OTHER_START"
 
         }
     }

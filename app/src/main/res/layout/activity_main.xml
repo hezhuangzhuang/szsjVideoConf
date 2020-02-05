@@ -26,9 +26,16 @@
 
     </com.hjq.bar.TitleBar>
 
+
+    <Button
+        android:id="@+id/btLogin"
+        android:text="开始登录"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView

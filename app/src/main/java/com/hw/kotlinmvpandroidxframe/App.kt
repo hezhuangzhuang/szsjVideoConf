@@ -27,7 +27,7 @@ class App : BaseApp() {
         super.onCreate()
 
         //腾讯bug线上搜集工具
-        CrashReport.initCrashReport(applicationContext, "9455fd103f", false)
+        CrashReport.initCrashReport(applicationContext, "74b4075814", false)
 
         //本地bug提示
         initCrashHandler()
@@ -39,7 +39,7 @@ class App : BaseApp() {
 
         // 在主进程初始化调用哈
         if (BuildConfig.DEBUG) {
-            BlockCanary.install(this, BlockCanaryContext()).start();
+//            BlockCanary.install(this, BlockCanaryContext()).start();
         }
 
         //初始化华为app

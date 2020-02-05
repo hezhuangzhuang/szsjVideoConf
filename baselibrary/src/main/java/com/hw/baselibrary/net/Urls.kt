@@ -27,9 +27,9 @@ object Urls {
     //客户环境-end
 
     //即时通讯和基础业务的路径
-    public var WEBSOCKET_URL = WEBSOCKET_FORMAL
+    public var WEBSOCKET_URL = WEBSOCKET_TEST
 
     //上传文件的服务器
-    public var FILE_URL = FILE_FORMAL
+    public var FILE_URL = FILE_TEST
 
 }
