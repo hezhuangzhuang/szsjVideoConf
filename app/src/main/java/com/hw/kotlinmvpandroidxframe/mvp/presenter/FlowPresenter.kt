@@ -31,7 +31,7 @@ class FlowPresenter @Inject constructor() : BasePresenter<FlowContract.View>(),
                     if (NetWorkContants.SUCCESS == baseData.result) {
                         showFirstNewList(baseData.dataList)
                     } else {
-                        showError(baseData.message)
+                        showError(baseData.msg)
                     }
                 }
             }, { t ->
@@ -54,7 +54,7 @@ class FlowPresenter @Inject constructor() : BasePresenter<FlowContract.View>(),
                     if (NetWorkContants.SUCCESS == baseData.result) {
                         showMoreNewList(baseData.dataList)
                     } else {
-                        showError(baseData.message)
+                        showError(baseData.msg)
                     }
                 }
             }, { t ->

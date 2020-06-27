@@ -115,6 +115,7 @@ object RouterPath {
 
             //创建会议
             const val TYPE_CREATE_CONF = 0
+
             //会议名称
             const val FILED_CONF_NAME = "confName"
             //会议时长
@@ -146,14 +147,12 @@ object RouterPath {
             //smc端口
             const val FILED_HUAWEI_SMC_PORT = "huaweiServerPort"
 
-
             //鉴权信息
             const val FILED_APP_PACKAGE_NAME = "appPackageName"
             const val FILED_SECRET_KEY = "secretKey"
             const val FILED_BASE_URL = "backServerUrl"
 
-
-
+            //是否第三方启动
             const val FILED_OTHER_START = "FILED_OTHER_START"
 
         }

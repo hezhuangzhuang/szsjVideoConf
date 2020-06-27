@@ -26,8 +26,10 @@ class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
 
+//        BlockCanary.install(this, BlockCanaryContext()).start()
+
         //腾讯bug线上搜集工具
-        CrashReport.initCrashReport(applicationContext, "74b4075814", false)
+        CrashReport.initCrashReport(applicationContext, "26c45fb8bd", false)
 
         //本地bug提示
         initCrashHandler()

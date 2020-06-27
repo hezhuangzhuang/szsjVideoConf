@@ -106,7 +106,8 @@ dependencies {
     api project(path: ':Provider')
 
     //华为vc模块
-    api project(path: ':HuaweiVcLib')
+//    api project(path: ':HuaweiVcLib')
+    api project(path: ':vclibrary')
 
     //Dagger2-每个使用到的模块都需要引入
     kapt rootProject.ext.daggerCompiler
@@ -114,12 +115,12 @@ dependencies {
     //Arouter-每个使用到的模块都需要引入--arouterCompiler
     kapt rootProject.ext.arouterCompiler
 
-//    //消息模块
-//    api project(path: ':MessageModule')
-
     //华为推送
     implementation 'com.huawei.hms:push:3.0.3.301'
 
     //获取地理位置
     implementation rootProject.ext.smartLocation
+
+
+    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
 }

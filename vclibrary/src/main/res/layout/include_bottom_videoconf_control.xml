@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@color/black">
+
+    <TextView
+        android:id="@+id/tvCloseCamera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_open_camera"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="关闭摄像头"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvSwitchCamera" />
+
+    <TextView
+        android:id="@+id/tvSwitchCamera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_switch_camera_normal"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="切换摄像头"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvCloseCamera"
+        app:layout_constraintRight_toLeftOf="@id/tvCloseMic"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvCloseMic"
+        android:layout_width="0dp"
+        tools:ignore="MissingConstraints"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_open_mic"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="静音"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvSwitchCamera"
+        app:layout_constraintRight_toLeftOf="@id/tvCloseLouder" />
+
+    <TextView
+        android:id="@+id/tvCloseLouder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:drawableTop="@mipmap/ic_open_louder"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="免提"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvCloseMic"
+        app:layout_constraintRight_toLeftOf="@id/tvOpenControl" />
+
+    <TextView
+        android:id="@+id/tvOpenControl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_open_control"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints"
+        android:text="会控"
+        android:textColor="@color/white"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvCloseLouder"
+        app:layout_constraintRight_toLeftOf="@id/tvOpenSamll" />
+
+    <TextView
+        android:id="@+id/tvOpenSamll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_close_samll"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="画中画"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toLeftOf="@id/tvHangUp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvOpenControl" />
+
+    <TextView
+        android:id="@+id/tvHangUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:drawableTop="@mipmap/ic_confing_hang_up"
+        android:drawablePadding="3dp"
+        android:gravity="center_horizontal"
+        android:text="挂断"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/color_da0909"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvOpenSamll" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

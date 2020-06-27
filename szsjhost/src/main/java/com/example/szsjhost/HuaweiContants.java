@@ -15,9 +15,9 @@ public class HuaweiContants {
 
     //加入会议
     public static final int TYPE_JOIN_CONF = 1;
+
     //加入会议的smc会议id
     public static final String FILED_SMC_CONF_ID = "smcConfId";
-
 
     //用户账号，同时也是uuid
     public static final String FILED_USER_NAME = "userName";
@@ -41,4 +41,7 @@ public class HuaweiContants {
     public static final String FILED_APP_PACKAGE_NAME = "appPackageName";
     public static final String FILED_SECRET_KEY = "secretKey";
     public static final String FILED_BASE_URL = "backServerUrl";
+
+    //是否第三方登录
+    public static final String FILED_OTHER_START = "FILED_OTHER_START";
 }

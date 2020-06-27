@@ -14,6 +14,25 @@ class ConfPresenter @Inject constructor() : BasePresenter<MainContract.View>(),
     MainContract.Presenter {
 
     override fun authentication(appPackageName: String, secretKey: String) {
+        checkViewAttached()
+        mRootView?.showLoading()
+
+        confService.authentication(appPackageName, secretKey)
+            .subscribe({ baseDate ->
+                mRootView?.apply {
+                    dismissLoading()
+                    if (NetWorkContants.SUCCESS.equals(baseDate.msg)) {
+                        authenticationSuccess()
+                    } else {
+                        authenticationFail(baseDate.msg)
+                    }
+                }
+            }, {
+                mRootView?.apply {
+                    dismissLoading()
+                    authenticationFail(ExceptionHandle.handleException(it))
+                }
+            })
     }
 
     @Inject
@@ -21,22 +40,21 @@ class ConfPresenter @Inject constructor() : BasePresenter<MainContract.View>(),
 
     override fun getConfList(siteUri: String) {
         checkViewAttached()
-        mRootView?.showLoading()
+//        mRootView?.showLoading()
 
         confService.queryConfList(siteUri)
             .subscribe({ baseData ->
                 mRootView?.apply {
-                    dismissLoading()
-                    if (NetWorkContants.RESPONSE_CODE == baseData.code) {
-                        queryConfSuccess(baseData.data.toString())
+                    //dismissLoading()
+                    if (NetWorkContants.SUCCESS.equals(baseData.msg)) {
+                        queryConfSuccess(baseData.data)
                     } else {
-                        dismissLoading()
                         queryConfFail(baseData.msg)
                     }
                 }
             }, {
                 mRootView?.apply {
-                    dismissLoading()
+                    //dismissLoading()
                     queryConfFail(ExceptionHandle.handleException(it))
                 }
             })

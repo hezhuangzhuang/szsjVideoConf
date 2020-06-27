@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clSearchTitle"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:visibility="gone"
+    android:background="@color/color_f2f2f2">
+
+    <EditText
+        android:id="@+id/etSearchContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="9dp"
+        android:background="@drawable/shape_search_input_content_bg"
+        android:drawableLeft="@mipmap/ic_search_lable"
+        android:drawablePadding="12dp"
+        android:ellipsize="end"
+        android:paddingLeft="15dp"
+        android:paddingRight="40dp"
+        android:singleLine="true"
+        android:textColor="@color/color_333"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvSearchCancle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1"
+        tools:text="搜索" />
+
+    <ImageView
+        android:id="@+id/ivDeleteSearchContent"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="12dp"
+        android:src="@mipmap/ic_search_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/etSearchContent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSearchCancle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:text="取消"
+        android:textColor="@color/color_666"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_e5e5e5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:background="@color/color_333" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

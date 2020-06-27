@@ -23,6 +23,7 @@
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
+            android:text="02790"
             android:paddingRight="12dp"
             android:layout_height="match_parent"
             android:gravity="right"
@@ -45,6 +46,7 @@
         <EditText
             android:id="@+id/etPwd"
             android:layout_width="match_parent"
+            android:text="admin123"
             android:layout_height="match_parent"
             android:paddingRight="12dp"
             android:gravity="right"
@@ -124,11 +126,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="会议名称"
+            android:text="接入码"
             android:textColor="#333"
             android:textSize="16sp" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/etSmcConfId"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

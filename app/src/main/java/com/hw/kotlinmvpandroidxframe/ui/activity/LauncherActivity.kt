@@ -11,6 +11,9 @@ import android.view.animation.ScaleAnimation
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
+import com.huawei.opensdk.commonservice.localbroadcast.CustomBroadcastConstants
+import com.huawei.opensdk.commonservice.localbroadcast.LocBroadcast
+import com.huawei.opensdk.commonservice.localbroadcast.LocBroadcastReceiver
 import com.hw.baselibrary.common.BaseApp
 import com.hw.baselibrary.constant.PermissionConstants
 import com.hw.baselibrary.net.NetWorkContants
@@ -21,12 +24,8 @@ import com.hw.baselibrary.utils.PermissionUtils
 import com.hw.baselibrary.utils.PhoneUtils
 import com.hw.baselibrary.utils.ToastHelper
 import com.hw.baselibrary.utils.sharedpreferences.SPStaticUtils
-import com.hw.huaweivclib.inter.HuaweiInitImp
 import com.hw.kotlinmvpandroidxframe.BuildConfig
 import com.hw.kotlinmvpandroidxframe.R
-import com.hw.provider.huawei.commonservice.localbroadcast.CustomBroadcastConstants
-import com.hw.provider.huawei.commonservice.localbroadcast.LocBroadcast
-import com.hw.provider.huawei.commonservice.localbroadcast.LocBroadcastReceiver
 import com.hw.provider.router.RouterPath
 import com.hw.provider.router.provider.huawei.impl.HuaweiModuleService
 import com.hw.provider.router.provider.user.impl.UserModuleRouteService
@@ -41,11 +40,11 @@ class LauncherActivity : BaseActivity() {
 
         //正式环境
         if (isFormalUrl) {
-            Urls.FILE_URL = Urls.FILE_FORMAL
-            Urls.WEBSOCKET_URL = Urls.WEBSOCKET_FORMAL
-        } else {//测试环境
-            Urls.FILE_URL = Urls.FILE_TEST
-            Urls.WEBSOCKET_URL = Urls.WEBSOCKET_TEST
+//            Urls.FILE_URL = Urls.FILE_FORMAL
+//            Urls.WEBSOCKET_URL = Urls.WEBSOCKET_FORMAL
+//        } else {//测试环境
+//            Urls.FILE_URL = Urls.FILE_TEST
+//            Urls.WEBSOCKET_URL = Urls.WEBSOCKET_TEST
         }
     }
 
@@ -69,9 +68,6 @@ class LauncherActivity : BaseActivity() {
                 override fun onGranted(permissionsGranted: List<String>) {
                     //注册广播
                     LocBroadcast.getInstance().registerBroadcast(loginReceiver, mActions)
-
-                    //初始化华为
-                    HuaweiInitImp.initHuawei(BaseApp.context, BuildConfig.APPLICATION_ID)
 
                     //是否已登录
                     val hasLogin = SPStaticUtils.getBoolean(UserContants.HAS_LOGIN)

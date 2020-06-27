@@ -13,7 +13,6 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.Uri
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,9 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun joinConf() {
         var smcConfId = etSmcConfId.text
-        showToast(smcConfId.toString())
 
-//        startVideoActivity(getJoinIntent())
+        startVideoActivity(getJoinConfIntent())
     }
 
     private fun createConf() {
@@ -54,7 +52,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getBaseIntent(): Intent {
-
         var intent = Intent()
         var cn = ComponentName(
             "com.zxwl.frame",
@@ -62,15 +59,18 @@ class MainActivity : AppCompatActivity() {
         )
 
         intent.setComponent(cn)
-        intent.putExtra(HuaweiContants.FILED_DISPLAY_NAME, "0000010006");
-        intent.putExtra(HuaweiContants.FILED_USER_NAME, "0000010006");
+        intent.putExtra(HuaweiContants.FILED_DISPLAY_NAME, etName.text.toString());
+        intent.putExtra(HuaweiContants.FILED_USER_NAME, etName.text.toString());
         intent.putExtra(HuaweiContants.FILED_PASS_WORD, etPwd.text.toString());
 
-        intent.putExtra(HuaweiContants.FILED_HUAWEI_SMC_URL, "113.57.147.173");
+        intent.putExtra(HuaweiContants.FILED_HUAWEI_SMC_URL, "192.168.17.95");
         intent.putExtra(HuaweiContants.FILED_HUAWEI_SMC_PORT, "5061");
 
         intent.putExtra(HuaweiContants.FILED_APP_PACKAGE_NAME, "FILED_APP_PACKAGE_NAME");
         intent.putExtra(HuaweiContants.FILED_SECRET_KEY, "FILED_SECRET_KEY");
+        intent.putExtra(HuaweiContants.FILED_BASE_URL, "http://192.168.16.122:8090/");
+
+        intent.putExtra(HuaweiContants.FILED_OTHER_START, true);
         return intent
     }
 
@@ -82,7 +82,19 @@ class MainActivity : AppCompatActivity() {
 
         intent.putExtra(HuaweiContants.FILED_CONF_NAME, etConfName.text.toString())
         intent.putExtra(HuaweiContants.FILED_DURATION, "180")
-        intent.putExtra(HuaweiContants.FILED_SITES, "0000010118,0000010119")
+        intent.putExtra(HuaweiContants.FILED_SITES, etSites.text.toString())
+
+        return intent
+    }
+
+    private fun getJoinConfIntent(): Intent {
+        var intent = getBaseIntent()
+
+        //类型创建会议
+        intent.putExtra(HuaweiContants.FILED_TYPE, HuaweiContants.TYPE_JOIN_CONF)
+
+        //smcid
+        intent.putExtra(HuaweiContants.FILED_SMC_CONF_ID, etSmcConfId.text.toString())
 
         return intent
     }

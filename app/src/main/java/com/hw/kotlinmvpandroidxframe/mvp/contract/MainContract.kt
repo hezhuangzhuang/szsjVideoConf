@@ -2,11 +2,11 @@ package com.hw.kotlinmvpandroidxframe.mvp.contract
 
 import com.hw.baselibrary.common.BaseData
 import com.hw.baselibrary.common.IBaseView
+import com.hw.kotlinmvpandroidxframe.net.bean.ConfBean
 
 interface MainContract {
     interface View : IBaseView {
-
-        fun queryConfSuccess(baseData: String)
+        fun queryConfSuccess(baseData: List<ConfBean>)
 
         fun queryConfFail(errorMsg: String)
 
@@ -14,7 +14,8 @@ interface MainContract {
         fun authenticationSuccess()
 
         //鉴权失败
-        fun authenticationFail()
+        fun authenticationFail(errorMsg: String)
+
     }
 
     interface Presenter {

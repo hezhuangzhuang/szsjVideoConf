@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clMemberlistTopControl"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/color_222">
+
+    <ImageView
+        android:id="@+id/ivMemberListBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@mipmap/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvMemberListConfName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="会议名称" />
+
+
+    <ImageView
+        android:id="@+id/ivAddMember"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_marginRight="12dp"
+        android:src="@mipmap/ic_add_member"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivRequestChair"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="12dp"
+        android:padding="5dp"
+        android:src="@mipmap/ic_request_chairman"
+        app:layout_constraintRight_toLeftOf="@id/ivAddMember"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivDelayConf"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:layout_marginRight="12dp"
+        android:src="@mipmap/ic_delay_conf"
+        app:layout_constraintRight_toLeftOf="@id/ivRequestChair"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivCloseAllMic"
+        android:layout_marginRight="12dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:visibility="gone"
+        android:src="@mipmap/ic_close_mute_all"
+        app:layout_constraintRight_toLeftOf="@id/ivDelayConf"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

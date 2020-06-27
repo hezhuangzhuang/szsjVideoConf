@@ -8,6 +8,13 @@ apply plugin: 'kotlin-kapt'
 //greendao数据库
 apply plugin: 'org.greenrobot.greendao'
 
+//TODO:Arouter需要配置--跳转页面要用到
+kapt {
+    arguments {
+        arg("moduleName", project.getName())
+    }
+}
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 

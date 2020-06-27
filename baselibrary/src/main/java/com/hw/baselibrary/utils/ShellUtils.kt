@@ -54,7 +54,7 @@ object ShellUtils {
      *
      * @param command         The command.
      * @param isRooted        True to use root, false otherwise.
-     * @param isNeedResultMsg True to return the message of result, false otherwise.
+     * @param isNeedResultMsg True to return the msg of result, false otherwise.
      * @return the single [CommandResult] instance
      */
     fun execCmd(
@@ -70,7 +70,7 @@ object ShellUtils {
      *
      * @param commands        The commands.
      * @param isRooted        True to use root, false otherwise.
-     * @param isNeedResultMsg True to return the message of result, false otherwise.
+     * @param isNeedResultMsg True to return the msg of result, false otherwise.
      * @return the single [CommandResult] instance
      */
     fun execCmd(
@@ -90,7 +90,7 @@ object ShellUtils {
      *
      * @param commands        The commands.
      * @param isRooted        True to use root, false otherwise.
-     * @param isNeedResultMsg True to return the message of result, false otherwise.
+     * @param isNeedResultMsg True to return the msg of result, false otherwise.
      * @return the single [CommandResult] instance
      */
     fun execCmd(

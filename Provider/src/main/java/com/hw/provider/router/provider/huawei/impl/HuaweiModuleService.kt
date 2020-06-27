@@ -5,13 +5,12 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.hw.provider.router.provider.huawei.IHuaweiModuleService
 
 /**
- *author：pc-20171125
- *data:2020/1/16 10:18
+ *  author：pc-20171125
+ *  data:2020/1/16 10:18
  */
 object HuaweiModuleService {
     val navigation =
         ARouter.getInstance().navigation(IHuaweiModuleService::class.java)
-
 
     /**
      * 初始化华为
@@ -66,6 +65,7 @@ object HuaweiModuleService {
         navigation.createConfNetWork(confName, duration, accessCode, memberSipList, groupId, type)
     }
 
+
     /**
      * 通过后台接口预约会议
      * @param confName      会议名称
@@ -102,13 +102,6 @@ object HuaweiModuleService {
     /**
      * 加入会议
      */
-    fun joinConf(accessCode: String) {
-        navigation.joinConf(accessCode)
-    }
-
-    /**
-     * 加入会议
-     */
     fun joinConfNetWork(
         smcConfId: String,
         siteUri: String
@@ -118,4 +111,24 @@ object HuaweiModuleService {
             siteUri
         )
     }
+
+    /*******************sdk接口**********************/
+    /**
+     * 使用sdk接口加入会议
+     */
+    fun joinConf(accessCode: String) {
+        navigation.joinConf(accessCode)
+    }
+
+    /**
+     * 使用sdk召集会议
+     */
+    fun createConf(
+        confName: String,
+        memberSipList: List<String>,
+        isVideoCall: Boolean
+    ) {
+        navigation.createConf(confName, memberSipList, isVideoCall)
+    }
+
 }

@@ -1,10 +1,11 @@
 package com.hw.kotlinmvpandroidxframe.mvp.model
 
+import com.hw.baselibrary.common.BaseData
 import com.hw.baselibrary.net.RetrofitManager
 import com.hw.baselibrary.net.Urls
 import com.hw.baselibrary.rx.scheduler.CustomCompose
-import com.hw.huaweivclib.net.respone.BaseData
 import com.hw.kotlinmvpandroidxframe.net.api.ConfApi
+import com.hw.kotlinmvpandroidxframe.net.bean.ConfBean
 import io.reactivex.Observable
 import retrofit2.http.Query
 import javax.inject.Inject
@@ -19,7 +20,7 @@ class ConfService @Inject constructor() {
      */
     fun queryConfList(
         siteUri: String
-    ): Observable<BaseData<String>> {
+    ): Observable<BaseData<ConfBean>> {
         return RetrofitManager.create(ConfApi::class.java, Urls.BASE_URL)
             .queryConfList(siteUri)
             .compose(CustomCompose())

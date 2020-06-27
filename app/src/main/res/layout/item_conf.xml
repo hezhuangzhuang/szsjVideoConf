@@ -9,20 +9,20 @@
     android:padding="20dp">
 
     <ImageView
-        android:id="@+id/iv_conf_status"
+        android:id="@+id/ivConfStatus"
         android:layout_width="62dp"
         android:layout_height="62dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="20dp"
-        tools:src="@mipmap/ic_conf_running" />
+        tools:src="@mipmap/ic_conf_status_running" />
 
     <TextView
-        android:id="@+id/tv_conf_name"
+        android:id="@+id/tvConfName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/iv_conf_status"
-        android:layout_toLeftOf="@+id/iv_join"
-        android:layout_toRightOf="@id/iv_conf_status"
+        android:layout_alignTop="@id/ivConfStatus"
+        android:layout_toLeftOf="@+id/ivJoinConf"
+        android:layout_toRightOf="@id/ivConfStatus"
         android:ellipsize="end"
         android:maxLines="2"
         android:textSize="17dp"
@@ -30,11 +30,11 @@
         tools:text="会议名称" />
 
     <TextView
-        android:id="@+id/tv_conf_time"
+        android:id="@+id/tvConfTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_conf_name"
-        android:layout_alignLeft="@id/tv_conf_name"
+        android:layout_below="@id/tvConfName"
+        android:layout_alignLeft="@id/tvConfName"
         android:layout_marginTop="6dp"
         android:drawableLeft="@mipmap/ic_conf_time"
         android:drawablePadding="8dp"
@@ -43,11 +43,11 @@
         tools:text="会议时间" />
 
     <TextView
-        android:id="@+id/tv_attend"
+        android:id="@+id/tvAttends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_conf_time"
-        android:layout_alignLeft="@id/tv_conf_name"
+        android:layout_below="@id/tvConfTime"
+        android:layout_alignLeft="@id/tvConfName"
         android:layout_marginTop="3dp"
         android:drawableLeft="@mipmap/ic_conf_attend"
         android:drawablePadding="8dp"
@@ -56,10 +56,10 @@
         tools:text="会议成员" />
 
     <ImageView
-        android:id="@+id/iv_join"
+        android:id="@+id/ivJoinConf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tv_conf_name"
+        android:layout_alignTop="@id/tvConfName"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
         android:src="@mipmap/ic_conf_join"

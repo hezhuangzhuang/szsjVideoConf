@@ -1,7 +1,10 @@
-include ':app', ':ConfModule', ':szsjhost',
+include ':app',
+        ':ConfModule',
+        ':szsjhost',
         ':baselibrary',
         ':Provider',
-        ':HuaweiVcLib'
+//        ':HuaweiVcLib',
+        ':vclibrary'
 include ':FlycoTabLayout_Lib'
 
-rootProject.name='KotlinMvpAndroidxFrame'
+rootProject.name='szsjVideoConf'

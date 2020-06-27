@@ -50,7 +50,7 @@ interface IHuaweiModuleService : IProvider {
     )
 
     /**
-     * 通过后台接口召集会议
+     * 通过后台接口预约会议
      * @param confName      会议名称
      * @param duration      会议时长，单位(分钟)
      * @param memberSipList 参会人员的sip号码，多个以逗号分隔
@@ -79,12 +79,26 @@ interface IHuaweiModuleService : IProvider {
     /**
      * 加入会议调用网络接口
      */
-    fun joinConfNetWork(smcConfId: String,
-                        siteUri: String):Boolean
+    fun joinConfNetWork(
+        smcConfId: String,
+        siteUri: String
+    ): Boolean
 
     /**
      * 初始化华为
      */
     fun initHuawei(application: Context, appName: String)
 
+
+    /**
+     * 通过sdk接口召集会议
+     * @param confName      会议名称
+     * @param memberSipList 参会人员的sip号码，多个以逗号分隔
+     * @param isVideoConf   false：语音会议，true：视频会议
+     */
+    fun createConf(
+        confName: String,
+        memberSipList: List<String>,
+        isVideoConf: Boolean
+    )
 }

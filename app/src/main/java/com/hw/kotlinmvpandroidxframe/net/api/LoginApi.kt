@@ -22,4 +22,5 @@ interface LoginApi {
         @Query("password") password: String,
         @Query("deviceID") deviceID: String
     ): Observable<LoginBean>
+
 }

@@ -10,11 +10,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/ConfModule" />
             <option value="$PROJECT_DIR$/FlycoTabLayout_Lib" />
-            <option value="$PROJECT_DIR$/HuaweiVcLib" />
             <option value="$PROJECT_DIR$/Provider" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/baselibrary" />
             <option value="$PROJECT_DIR$/szsjhost" />
+            <option value="$PROJECT_DIR$/vclibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

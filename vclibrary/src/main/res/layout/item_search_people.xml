@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <TextView
+        android:id="@+id/tvAddtendName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:drawableLeft="@mipmap/ic_check_false"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_333"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:text="sss" />
+
+    <View
+        app:layout_constraintLeft_toLeftOf="@id/tvAddtendName"
+        app:layout_constraintRight_toRightOf="@id/tvAddtendName"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_height="0.5dp"
+        android:background="@color/color_e5e5e5"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

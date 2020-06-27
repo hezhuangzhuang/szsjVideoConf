@@ -1,6 +1,5 @@
 package com.hw.kotlinmvpandroidxframe.net.api
 
-import com.hw.huaweivclib.net.respone.BaseData
 import io.reactivex.Observable
 import retrofit2.http.Headers
 import retrofit2.http.POST

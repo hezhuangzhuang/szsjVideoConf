@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zxwl.vclibrary.activity.VideoConfActivity">
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/hideVideoView"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/bigRemoteView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/darker_gray" />
+
+    <FrameLayout
+        android:id="@+id/flLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30dp">
+
+<!--        <com.zxwl.vclibrary.widget.DragFrameLayout-->
+<!--            android:id="@+id/smallLocalView"-->
+<!--            android:layout_width="160dp"-->
+<!--            android:layout_height="90dp"-->
+<!--            android:background="#666666"-->
+<!--            /> -->
+        <FrameLayout
+            android:id="@+id/smallLocalView"
+            android:layout_width="160dp"
+            android:layout_height="90dp"
+            android:background="#666666"
+            />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flControl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+
+        <include
+            layout="@layout/include_top_videoconf_control"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top" />
+
+        <include
+            layout="@layout/include_bottom_videoconf_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <include
+        layout="@layout/include_conf_member_list_control" />
+
+</RelativeLayout>

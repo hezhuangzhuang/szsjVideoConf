@@ -28,7 +28,7 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
                     if (NetWorkContants.SUCCESS == baseData.result) {
                         showFirstNewList(baseData.dataList)
                     } else {
-                        showError(baseData.message)
+                        showError(baseData.msg)
                     }
                 }
             }, { t ->
@@ -53,7 +53,7 @@ class HomePresenter : BasePresenter<HomeContract.View>(), HomeContract.Presenter
                     if (NetWorkContants.SUCCESS == baseData.result) {
                         showMoreNewList(baseData.dataList)
                     } else {
-                        showError(baseData.message)
+                        showError(baseData.msg)
                     }
                 }
             }, { t ->

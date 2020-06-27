@@ -164,7 +164,7 @@ class HomeFragment : BaseLazyFragment(),
     }
 
     override fun showEmptyView() {
-        ToastHelper.showShort("每月数据了")
+        ToastHelper.showShort("没有数据了")
     }
 
     override fun onDestroy() {

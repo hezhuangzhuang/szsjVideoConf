@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_calling_bg"
+    android:paddingBottom="36dp"
+    tools:context="com.zxwl.vclibrary.activity.CallerIDActivity">
+
+    <Space
+        android:id="@+id/centerSpace"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp" />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/centerSpace"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="罗倩倩罗倩倩罗倩倩罗倩倩罗倩倩罗倩倩" />
+
+    <TextView
+        android:id="@+id/tvCallContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="想与您视频通话..." />
+
+    <TextView
+        android:id="@+id/tvHangUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/centerSpace"
+        android:drawableTop="@mipmap/ic_hang_up"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="挂断"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@id/centerSpace"
+        android:drawableTop="@mipmap/ic_answer"
+        android:drawablePadding="8dp"
+        android:gravity="center"
+        android:text="接听"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/ivVoiceAnsewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tvAnswer"
+        android:layout_alignLeft="@id/tvAnswer"
+        android:src="@mipmap/ic_voice_answer" />
+
+
+</RelativeLayout>
